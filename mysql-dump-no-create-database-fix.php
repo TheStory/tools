@@ -15,6 +15,9 @@ class DumpFixer
 
     public function fixDump()
     {
+        Console::write('MySQL Dump fixer v1.0');
+        Console::write('=====================');
+
         $this->transformDumpFile();
     }
 
@@ -84,9 +87,6 @@ class DumpFixer
         return sprintf($sql . PHP_EOL, $this->foundDatabase);
     }
 }
-
-Console::write('MySQL Dump fixer v1.0');
-Console::write('=====================');
 
 $fixer = new DumpFixer();
 $fixer->fixDump();
