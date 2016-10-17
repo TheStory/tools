@@ -64,6 +64,10 @@ class DumpFixer
     {
         if (!$this->params) {
             $this->params = getopt('', ['input:', 'output:']);
+
+            if (!($this->isCommandLinkeParametertValid('input') && $this->isCommandLinkeParametertValid('output'))) {
+                $this->showUsage();
+            }
         }
 
         $param = $this->params[$paramName];
@@ -85,6 +89,20 @@ class DumpFixer
     private function prepareSql($sql)
     {
         return sprintf($sql . PHP_EOL, $this->foundDatabase);
+    }
+
+    private function showUsage()
+    {
+        Console::write('Usage. All params required:');
+        Console::write('--input - source dump file path');
+        Console::write('--output - target file path');
+
+        exit(1);
+    }
+
+    private function isCommandLinkeParametertValid($paramName)
+    {
+        return isset($this->params[$paramName]) && !empty($this->params[$paramName]);
     }
 }
 
